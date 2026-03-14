@@ -1,0 +1,185 @@
+{
+  "skill_name": "gsd-debugger",
+  "description": "问题调试技能。使用 AskUserQuestion 确认问题症状，然后进行根因分析。",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "gsd-debugger: 我的应用报错了，错误信息是 Cannot read property 'name' of undefined",
+      "expected_output": {
+        "primary_output": "使用 AskUserQuestion 确认问题症状，然后诊断",
+        "symptom_confirmation": "错误类型：空指针异常，位置：访问 .name 属性",
+        "diagnosis_steps": ["定位错误代码", "分析变量来源", "确定修复方案"]
+      },
+      "files": [],
+      "expectations": [
+        "使用 AskUserQuestion 确认症状",
+        "进行问题诊断"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "gsd-debugger: 页面加载很慢，帮我分析原因",
+      "expected_output": {
+        "primary_output": "收集性能问题信息并分析",
+        "performance_metrics": {
+          "load_time": "待测量",
+          "time_to_first_byte": "待测量",
+          "render_blocking": "待识别"
+        },
+        "diagnosis_result": "性能瓶颈分析"
+      },
+      "files": [],
+      "expectations": [
+        "收集问题信息",
+        "分析性能瓶颈"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "gsd-debugger: 使用调试工具分析代码中的问题",
+      "expected_output": {
+        "primary_output": "使用调试工具进行深度分析",
+        "tools_used": ["断点调试", "日志分析", "性能分析器"],
+        "analysis_results": "工具分析结果"
+      },
+      "files": [],
+      "expectations": [
+        "选择合适的调试工具",
+        "使用工具进行分析",
+        "解读工具输出"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "gsd-debugger: 应用同时出现登录失败和数据加载失败两个问题",
+      "expected_output": {
+        "primary_output": "识别并关联多个问题",
+        "problem_relationship": {
+          "issue_1": "登录失败",
+          "issue_2": "数据加载失败",
+          "correlation": "登录失败导致 token 缺失，进而导致数据加载失败"
+        },
+        "resolution_order": "先解决登录问题"
+      },
+      "files": [],
+      "expectations": [
+        "识别多个问题",
+        "分析问题关联",
+        "确定解决顺序"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "gsd-debugger: 修复了一个内存泄漏问题，帮我验证修复是否成功",
+      "expected_output": {
+        "primary_output": "执行修复验证",
+        "verification_steps": ["运行内存分析", "对比修复前后", "确认泄漏已修复"],
+        "verification_result": "修复是否成功"
+      },
+      "files": [],
+      "expectations": [
+        "执行修复验证测试",
+        "对比修复前后数据",
+        "确认问题已解决"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "gsd-debugger: 页面首次加载需要 8 秒，严重影响用户体验",
+      "expected_output": {
+        "primary_output": "进行性能瓶颈分析",
+        "bottleneck_analysis": {
+          "cause_1": "大型 bundle 未分割",
+          "cause_2": "图片未优化",
+          "cause_3": "API 请求串行"
+        },
+        "optimization_suggestions": ["代码分割", "图片懒加载", "请求并行化"]
+      },
+      "files": [],
+      "expectations": [
+        "识别性能瓶颈",
+        "分析瓶颈原因",
+        "提供优化建议"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "gsd-debugger: 应用运行一段时间后内存持续增长，疑似内存泄漏",
+      "expected_output": {
+        "primary_output": "检测并定位内存泄漏",
+        "leak_detection": {
+          "symptom": "内存持续增长",
+          "suspected_causes": ["未清理的事件监听器", "闭包引用", "DOM 泄漏"],
+          "定位方法": "内存快照对比"
+        },
+        "leak_source": "定位到的泄漏源头"
+      },
+      "files": [],
+      "expectations": [
+        "检测内存泄漏",
+        "定位泄漏位置",
+        "提供修复建议"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "gsd-debugger: API 请求经常超时或失败",
+      "expected_output": {
+        "primary_output": "诊断网络请求问题",
+        "network_analysis": {
+          "failure_rate": "30%",
+          "common_errors": ["ETIMEDOUT", "ECONNRESET"],
+          "possible_causes": ["服务端过载", "网络不稳定", "DNS 问题"]
+        },
+        "diagnosis_result": "问题根因"
+      },
+      "files": [],
+      "expectations": [
+        "分析网络请求日志",
+        "识别错误模式",
+        "定位问题原因"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "gsd-debugger: 多线程并发处理时出现数据不一致问题",
+      "expected_output": {
+        "primary_output": "分析并发问题",
+        "concurrency_issues": {
+          "symptom": "数据不一致",
+          "root_cause": "竞态条件",
+          "affected_code": "计数器更新逻辑"
+        },
+        "solution": "添加同步机制"
+      },
+      "files": [],
+      "expectations": [
+        "识别并发问题",
+        "分析竞态条件",
+        "提供同步方案"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "gsd-debugger: 问题已定位并修复，生成调试报告",
+      "expected_output": {
+        "primary_output": "生成调试总结报告",
+        "report_content": {
+          "problem_description": "问题描述",
+          "root_cause": "根本原因",
+          "fix_applied": "修复方案",
+          "verification": "验证结果",
+          "lessons_learned": "经验总结"
+        },
+        "format": "Markdown"
+      },
+      "files": [],
+      "expectations": [
+        "记录问题描述",
+        "记录根因分析",
+        "记录修复方案",
+        "提供经验总结"
+      ]
+    }
+  ]
+}

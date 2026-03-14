@@ -1,0 +1,146 @@
+{
+  "skill_name": "gsd-planner",
+  "description": "任务规划技能。创建任务计划，使用 TodoWrite 显示规划步骤，准备 Trae Plan 模式所需的信息。注意：规划阶段不使用 TodoWrite，因为需要持久化存储在 PLAN.md 中。",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "gsd-planner: 为下一个开发阶段创建计划，包含 5 个任务",
+      "expected_output": {
+        "primary_output": "生成 PLAN.md 计划文档",
+        "document_location": ".planning/phases/*/PLAN.md",
+        "structure": {
+          "tasks": "5 个任务列表",
+          "dependencies": "任务依赖关系",
+          "timeline": "时间线规划"
+        }
+      },
+      "files": [],
+      "expectations": [
+        "生成计划文档 PLAN.md",
+        "不在规划阶段使用 TodoWrite",
+        "文档结构完整"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "gsd-planner: 准备 Trae Plan 模式所需的信息，用于执行 3 个子任务",
+      "expected_output": {
+        "primary_output": "生成任务摘要信息供 Plan 模式使用",
+        "information_structure": {
+          "task_summary": "任务目标和技术栈",
+          "technical_stack": ["React", "TypeScript", "Node.js"],
+          "task_steps": ["步骤1", "步骤2", "步骤3"]
+        }
+      },
+      "files": [],
+      "expectations": [
+        "准备任务目标信息",
+        "准备技术栈信息",
+        "准备任务步骤信息"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "gsd-planner: 为登录功能创建计划，需要在 3 个方案中选择最佳方案",
+      "expected_output": {
+        "primary_output": "提供多方案对比分析",
+        "comparison_dimensions": ["实现复杂度", "维护成本", "扩展性", "安全性"],
+        "recommendation": "推荐方案及理由"
+      },
+      "files": [],
+      "expectations": [
+        "生成至少 2 个方案",
+        "提供方案比较维度",
+        "给出推荐建议"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "gsd-planner: 创建计划后需要进行计划评审，收集反馈",
+      "expected_output": {
+        "primary_output": "执行计划评审流程",
+        "review_aspects": ["完整性", "可行性", "优先级", "风险"],
+        "feedback_collection": "收集评审意见并整合"
+      },
+      "files": [],
+      "expectations": [
+        "列出评审要点",
+        "收集评审反馈",
+        "整合改进建议"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "gsd-planner: 原有计划需要变更，将任务 A 从本周改到下周",
+      "expected_output": {
+        "primary_output": "处理计划变更",
+        "change_record": {
+          "field": "时间安排",
+          "before": "本周",
+          "after": "下周"
+        },
+        "impact_assessment": "变更对其他任务的影响"
+      },
+      "files": [],
+      "expectations": [
+        "记录变更内容",
+        "评估变更影响",
+        "更新计划文档"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "gsd-planner: 为 10 个任务进行优先级排序",
+      "expected_output": {
+        "primary_output": "生成优先级排序结果",
+        "priority_levels": ["P0-紧急", "P1-高", "P2-中", "P3-低"],
+        "sorting_rationale": "排序理由"
+      },
+      "files": [],
+      "expectations": [
+        "定义优先级级别",
+        "为每个任务分配优先级",
+        "提供排序理由"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "gsd-planner: 估算计划中每个任务所需资源和时间",
+      "expected_output": {
+        "primary_output": "生成资源估算报告",
+        "estimation_breakdown": {
+          "task_1": {"hours": 8, "personnel": "1 前端"},
+          "task_2": {"hours": 16, "personnel": "1 后端"}
+        },
+        "total_effort": "总工时估算"
+      },
+      "files": [],
+      "expectations": [
+        "为每个任务估算时间",
+        "估算人力需求",
+        "计算总工时"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "gsd-planner: 识别计划中的潜在风险",
+      "expected_output": {
+        "primary_output": "生成风险识别报告",
+        "risk_items": [
+          {
+            "risk": "外部 API 依赖可能不稳定",
+            "severity": "高",
+            "mitigation": "添加降级方案"
+          }
+        ],
+        "risk_level": "整体风险评级"
+      },
+      "files": [],
+      "expectations": [
+        "列出潜在风险",
+        "评估风险等级",
+        "提供缓解措施"
+      ]
+    }
+  ]
+}

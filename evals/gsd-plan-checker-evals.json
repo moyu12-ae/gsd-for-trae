@@ -1,0 +1,155 @@
+{
+  "skill_name": "gsd-plan-checker",
+  "description": "计划检查技能。检查计划完整性，使用 TodoWrite 显示检查进度。",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "gsd-plan-checker: 检查这个计划是否完整",
+      "expected_output": {
+        "primary_output": "检查计划完整性，使用 TodoWrite 显示检查进度",
+        "check_items": [
+          {"item": "任务列表", "status": "checked"},
+          {"item": "时间安排", "status": "checked"},
+          {"item": "资源分配", "status": "checked"}
+        ],
+        "completeness_score": "完整性评分"
+      },
+      "files": [],
+      "expectations": [
+        "使用 TodoWrite 显示检查进度",
+        "检查计划各部分完整性"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "gsd-plan-checker: 检查任务列表是否合理",
+      "expected_output": {
+        "primary_output": "分析任务列表并给出建议",
+        "task_analysis": {
+          "total_tasks": 10,
+          "estimated_hours": 40,
+          "parallel_possible": 3
+        },
+        "suggestions": ["任务 B 和 C 可以并行", "任务 E 估计过长"]
+      },
+      "files": [],
+      "expectations": [
+        "分析任务列表",
+        "提供改进建议"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "gsd-plan-checker: 检查计划中每个任务的优先级是否合理",
+      "expected_output": {
+        "primary_output": "评估任务优先级",
+        "priority_review": {
+          "P0_tasks": ["核心功能开发"],
+          "P1_tasks": ["重要功能"],
+          "issues": ["P2 任务不应在 P0 之前"]
+        }
+      },
+      "files": [],
+      "expectations": [
+        "验证优先级定义",
+        "检查优先级顺序",
+        "指出不合理之处"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "gsd-plan-checker: 检查计划中是否有遗漏的关键任务",
+      "expected_output": {
+        "primary_output": "识别遗漏的关键任务",
+        "missing_tasks": [
+          "测试任务",
+          "部署任务",
+          "文档编写"
+        ],
+        "criticality": "这些任务的关键程度"
+      },
+      "files": [],
+      "expectations": [
+        "识别关键任务类别",
+        "检查是否包含这些任务",
+        "评估遗漏影响"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "gsd-plan-checker: 检查计划中的时间估算是否合理",
+      "expected_output": {
+        "primary_output": "评估时间估算",
+        "time_analysis": {
+          "total_hours": 80,
+          "available_hours": 60,
+          "over_allocation": true
+        },
+        "recommendations": ["减少任务范围", "增加资源", "延长时间线"]
+      },
+      "files": [],
+      "expectations": [
+        "计算总时间需求",
+        "对比可用时间",
+        "提供调整建议"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "gsd-plan-checker: 检查任务之间的依赖关系是否正确",
+      "expected_output": {
+        "primary_output": "验证依赖关系",
+        "dependency_check": {
+          "valid_dependencies": 5,
+          "circular_dependencies": 1,
+          "missing_dependencies": 2
+        },
+        "issues": ["发现循环依赖 A→B→C→A"]
+      },
+      "files": [],
+      "expectations": [
+        "识别所有依赖",
+        "检测循环依赖",
+        "检测缺失依赖"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "gsd-plan-checker: 检查计划是否覆盖所有验收标准",
+      "expected_output": {
+        "primary_output": "对比计划与验收标准",
+        "coverage_analysis": {
+          "total_criteria": 10,
+          "covered_criteria": 8,
+          "uncovered": ["性能指标", "安全要求"]
+        }
+      },
+      "files": [],
+      "expectations": [
+        "列出验收标准",
+        "检查覆盖情况",
+        "识别未覆盖项"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "gsd-plan-checker: 生成完整的计划检查报告",
+      "expected_output": {
+        "primary_output": "生成结构化检查报告",
+        "report_content": {
+          "summary": "检查摘要",
+          "completeness_score": 0.85,
+          "issues_found": 3,
+          "recommendations": ["添加测试任务", "调整时间估算"]
+        },
+        "format": "Markdown"
+      },
+      "files": [],
+      "expectations": [
+        "包含检查摘要",
+        "列出发现的问题",
+        "提供改进建议"
+      ]
+    }
+  ]
+}

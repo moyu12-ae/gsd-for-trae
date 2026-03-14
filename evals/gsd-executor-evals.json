@@ -1,0 +1,179 @@
+{
+  "skill_name": "gsd-executor",
+  "description": "任务执行技能。执行具体开发任务，使用 TodoWrite 跟踪进度，在必要时推荐使用 Trae Plan 模式，在重大变更前使用 AskUserQuestion 确认。",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "gsd-executor: 执行任务 T1: 创建用户登录组件，需要在 30 分钟内完成",
+      "expected_output": {
+        "primary_output": "TodoWrite 被调用，包含任务 '创建用户登录组件'，status 为 'in_progress'",
+        "secondary_outputs": ["创建组件文件 src/components/Login.tsx"],
+        "quality_criteria": {
+          "todo_format": "符合 TodoWrite JSON 格式，包含 id、content、status、priority 字段",
+          "progress_tracked": "包含清晰的任务进度"
+        }
+      },
+      "files": [],
+      "expectations": [
+        "TodoWrite 被调用，格式符合 schema",
+        "包含任务 '创建用户登录组件'",
+        "status 设置为 'in_progress'",
+        "priority 设置为 'high'"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "gsd-executor: 执行任务 - 这个任务有明确的输入输出，步骤可分解为 5 个子步骤",
+      "expected_output": {
+        "primary_output": "推荐用户使用 Trae Plan 模式",
+        "suggestion_text": "这个任务适合使用 Trae Plan 模式，输入 / 选择 Plan...",
+        "plan_mode_benefits": ["更清晰的任务步骤", "用户确认后执行", "更好的进度跟踪"]
+      },
+      "files": [],
+      "expectations": [
+        "识别适合 Plan 模式的场景",
+        "提供 Plan 模式使用提示",
+        "解释使用 Plan 模式的好处"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "gsd-executor: 执行任务时发现需要修改架构：从组件内状态改为 Redux 状态管理",
+      "expected_output": {
+        "primary_output": "使用 AskUserQuestion 询问用户确认",
+        "question_text": "修复需要修改架构，从组件内状态改为 Redux 状态管理，是否继续？",
+        "options": [
+          {"label": "是，继续修改", "description": "确认架构变更"},
+          {"label": "否，保持现状", "description": "取消架构变更"},
+          {"label": "讨论更多", "description": "需要更多信息"}
+        ]
+      },
+      "files": [],
+      "expectations": [
+        "使用 AskUserQuestion 询问确认",
+        "提供清晰的变更描述",
+        "提供多个选项供用户选择"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "gsd-executor: 执行任务 T1: 数据抓取任务，预计需要 2 小时完成，但在 30 分钟时仍未完成",
+      "expected_output": {
+        "primary_output": "检测到超时风险，触发超时处理流程",
+        "actions": ["保存当前进度", "记录已完成部分", "报告超时状态"],
+        "user_notification": "通知用户任务超时并提供进度报告"
+      },
+      "files": [],
+      "expectations": [
+        "检测超时状态",
+        "保存进度到持久化存储",
+        "通知用户当前状态",
+        "提供后续处理选项"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "gsd-executor: 执行任务 T1: 调用外部 API 获取数据，但 API 返回 500 错误",
+      "expected_output": {
+        "primary_output": "处理执行失败场景",
+        "actions": ["记录错误详情", "尝试重试机制", "报告失败原因"],
+        "retry_policy": "根据错误类型决定是否重试及重试次数"
+      },
+      "files": [],
+      "expectations": [
+        "捕获错误信息",
+        "评估错误类型",
+        "执行适当的重试逻辑",
+        "无法恢复时报告失败"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "gsd-executor: 同时执行 3 个独立任务：任务 A（创建组件）、任务 B（编写测试）、任务 C（更新文档）",
+      "expected_output": {
+        "primary_output": "并行执行多个任务",
+        "task_coordination": {
+          "task_a": "创建组件",
+          "task_b": "编写测试",
+          "task_c": "更新文档"
+        },
+        "resource_management": "合理分配资源，避免冲突"
+      },
+      "files": [],
+      "expectations": [
+        "识别任务间的独立性",
+        "并行执行独立任务",
+        "处理任务间的资源竞争"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "gsd-executor: 执行任务 T2: 创建用户详情页，该任务依赖于 T1: 创建用户登录组件 完成后才能开始",
+      "expected_output": {
+        "primary_output": "检测任务依赖关系",
+        "dependency_check": "验证 T1 是否已完成",
+        "execution_order": "先执行 T1，再执行 T2"
+      },
+      "files": [],
+      "expectations": [
+        "识别任务依赖关系",
+        "检查前置任务完成状态",
+        "按正确顺序执行任务"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "gsd-executor: 用户在任务执行中途要求取消当前正在执行的任务 T1: 创建登录组件",
+      "expected_output": {
+        "primary_output": "处理任务取消请求",
+        "actions": ["确认取消操作", "清理已分配资源", "保存部分进度（如适用）"],
+        "user_confirmation": "确认用户确实要取消任务"
+      },
+      "files": [],
+      "expectations": [
+        "确认用户取消意图",
+        "安全地停止任务",
+        "清理相关资源"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "gsd-executor: 执行任务过程中遇到系统故障，需要保存进度并在恢复后继续执行",
+      "expected_output": {
+        "primary_output": "实现断点续传功能",
+        "state_persistence": {
+          "storage_location": ".planning/phases/*/progress.json",
+          "saved_data": ["任务状态", "已完成步骤", "中间结果"]
+        },
+        "resume_capability": "支持从保存点恢复执行"
+      },
+      "files": [],
+      "expectations": [
+        "定期保存执行进度",
+        "将状态写入持久化存储",
+        "支持从保存点恢复"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "gsd-executor: 执行任务时发现需要将数据库从 MySQL 改为 PostgreSQL，这是重大架构变更",
+      "expected_output": {
+        "primary_output": "使用 AskUserQuestion 进行重大变更确认",
+        "change_description": "数据库迁移：MySQL → PostgreSQL",
+        "impact_assessment": ["数据迁移风险", "代码修改范围", "测试覆盖需求"],
+        "options": [
+          {"label": "确认迁移", "description": "继续执行数据库迁移"},
+          {"label": "暂不迁移", "description": "保持现有 MySQL"},
+          {"label": "评估后再定", "description": "需要更详细的评估"}
+        ]
+      },
+      "files": [],
+      "expectations": [
+        "识别为重大架构变更",
+        "评估变更影响范围",
+        "使用 AskUserQuestion 获取确认",
+        "记录变更决策"
+      ]
+    }
+  ]
+}

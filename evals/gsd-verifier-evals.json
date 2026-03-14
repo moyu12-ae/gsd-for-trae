@@ -1,0 +1,193 @@
+{
+  "skill_name": "gsd-verifier",
+  "description": "任务验证技能。验证功能是否完成，使用 AskUserQuestion 收集验证结果反馈。",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "gsd-verifier: 验证用户登录功能是否完成，包含用户名密码登录和第三方登录",
+      "expected_output": {
+        "primary_output": "执行验证流程，使用 AskUserQuestion 反馈结果",
+        "verification_items": [
+          {"item": "用户名密码登录", "status": "verified/failed"},
+          {"item": "第三方登录", "status": "verified/failed"}
+        ],
+        "feedback_question": "验证完成，是否符合预期？"
+      },
+      "files": [],
+      "expectations": [
+        "执行功能验证",
+        "使用 AskUserQuestion 收集反馈"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "gsd-verifier: 验证项目中所有测试是否通过",
+      "expected_output": {
+        "primary_output": "运行测试并验证结果",
+        "test_summary": {
+          "total": 50,
+          "passed": 48,
+          "failed": 2
+        },
+        "failed_tests": ["test_login.py::test_invalid_credentials", "test_api.py::test_timeout"]
+      },
+      "files": [],
+      "expectations": [
+        "运行测试",
+        "验证测试结果"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "gsd-verifier: 自定义验证标准：登录响应时间必须小于 200ms",
+      "expected_output": {
+        "primary_output": "根据自定义标准进行验证",
+        "custom_criteria": {
+          "metric": "响应时间",
+          "threshold": "200ms",
+          "comparison": "小于"
+        },
+        "measurement_result": "实际测量值"
+      },
+      "files": [],
+      "expectations": [
+        "解析自定义验证标准",
+        "执行测量",
+        "与阈值比较"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "gsd-verifier: 验证 5 个功能点，其中 3 个通过，2 个失败",
+      "expected_output": {
+        "primary_output": "处理部分通过场景",
+        "partial_result": {
+          "passed": 3,
+          "failed": 2,
+          "pass_rate": "60%"
+        },
+        "failed_items": ["功能点 A", "功能点 B"]
+      },
+      "files": [],
+      "expectations": [
+        "识别部分成功情况",
+        "区分通过和失败项",
+        "提供改进建议"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "gsd-verifier: 验证功能时发现多个测试失败",
+      "expected_output": {
+        "primary_output": "分析验证失败原因",
+        "failure_analysis": {
+          "root_causes": ["数据库连接池配置错误", "API 超时设置过短"],
+          "severity": "高"
+        },
+        "recommendations": ["修复数据库配置", "调整超时设置"]
+      },
+      "files": [],
+      "expectations": [
+        "收集失败信息",
+        "分析根本原因",
+        "提供修复建议"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "gsd-verifier: 对比当前版本与上一版本的测试结果，检查是否有回归",
+      "expected_output": {
+        "primary_output": "执行回归测试对比",
+        "comparison": {
+          "previous_version": "v1.0",
+          "current_version": "v1.1",
+          "new_failures": ["test_api.py::test_rate_limit"],
+          "regressions": true
+        }
+      },
+      "files": [],
+      "expectations": [
+        "加载历史版本数据",
+        "对比测试结果",
+        "识别新增失败"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "gsd-verifier: 在 CI/CD 流水线中自动验证部署",
+      "expected_output": {
+        "primary_output": "执行自动化验证",
+        "ci_cd_integration": {
+          "pipeline": "GitHub Actions",
+          "trigger": "on push to main",
+          "automated_checks": ["单元测试", "集成测试", "部署验证"]
+        },
+        "exit_code": 0
+      },
+      "files": [],
+      "expectations": [
+        "集成到 CI/CD 流程",
+        "自动执行验证",
+        "返回明确的退出码"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "gsd-verifier: 需要人工检查 UI 界面是否符合设计稿",
+      "expected_output": {
+        "primary_output": "设置手动验证检查点",
+        "manual_checkpoints": [
+          {"item": "登录页面布局", "requires_human": true},
+          {"item": "颜色是否匹配设计稿", "requires_human": true},
+          {"item": "API 响应数据", "requires_human": false}
+        ],
+        "human_verification_needed": true
+      },
+      "files": [],
+      "expectations": [
+        "识别需要人工检查的项目",
+        "标记自动检查项目",
+        "提供检查指引"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "gsd-verifier: 验证完成后生成验证报告",
+      "expected_output": {
+        "primary_output": "生成结构化验证报告",
+        "report_structure": {
+          "summary": "验证摘要",
+          "details": "详细结果",
+          "metrics": "关键指标",
+          "recommendations": "改进建议"
+        },
+        "format": "Markdown"
+      },
+      "files": [],
+      "expectations": [
+        "包含验证摘要",
+        "包含详细结果",
+        "包含指标和建议"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "gsd-verifier: 查看验证历史记录，对比过去 30 天的验证结果",
+      "expected_output": {
+        "primary_output": "生成验证历史趋势分析",
+        "historical_analysis": {
+          "time_range": "30 天",
+          "trend": "改进中",
+          "stability_score": 0.85,
+          "avg_pass_rate": "92%"
+        }
+      },
+      "files": [],
+      "expectations": [
+        "加载历史验证记录",
+        "分析趋势",
+        "计算稳定性指标"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "skill_name": "gsd-context",
+  "description": "上下文管理技能。管理项目状态、Session 信息、交接文档等。",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "gsd-context: 帮我创建当前项目的状态文档",
+      "expected_output": {
+        "primary_output": "生成项目状态文档",
+        "document_content": {
+          "current_phase": "Phase 2: 核心功能开发",
+          "completed_tasks": ["用户认证", "基础框架"],
+          "in_progress_tasks": ["API 开发"],
+          "blockers": ["第三方 API 延迟"]
+        }
+      },
+      "files": [],
+      "expectations": [
+        "收集项目状态信息",
+        "生成状态文档"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "gsd-context: 帮我创建交接文档，需要交接给同事继续开发",
+      "expected_output": {
+        "primary_output": "生成交接文档模板",
+        "handoff_content": {
+          "project_overview": "项目概述",
+          "current_status": "当前状态",
+          "pending_tasks": ["待办任务"],
+          "key_decisions": ["关键决策记录"],
+          "technical_notes": ["技术备注"],
+          "contact_info": "联系方式"
+        }
+      },
+      "files": [],
+      "expectations": [
+        "使用 handoff_template",
+        "生成交接文档"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "gsd-context: 保存当前的 Session 状态，以便后续恢复",
+      "expected_output": {
+        "primary_output": "保存 Session 状态",
+        "session_data": {
+          "project_path": "/path/to/project",
+          "current_phase": "Phase 2",
+          "open_files": ["file1.ts", "file2.ts"],
+          "recent_commands": ["npm run dev"]
+        }
+      },
+      "files": [],
+      "expectations": [
+        "收集 Session 信息",
+        "保存到持久化存储"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "gsd-context: 从之前保存的状态中恢复工作",
+      "expected_output": {
+        "primary_output": "恢复之前的工作状态",
+        "restored_state": {
+          "current_phase": "Phase 2",
+          "context_loaded": true,
+          "ready_to_continue": true
+        }
+      },
+      "files": [],
+      "expectations": [
+        "读取保存的状态",
+        "恢复上下文",
+        "确认恢复成功"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "gsd-context: 项目需要跨会话保持状态，帮我设计状态管理方案",
+      "expected_output": {
+        "primary_output": "设计状态管理方案",
+        "state_management": {
+          "storage_location": ".planning/STATE.md",
+          "state_components": ["当前阶段", "任务进度", "关键决策"],
+          "persistence_strategy": "文件持久化 + 自动保存"
+        }
+      },
+      "files": [],
+      "expectations": [
+        "设计状态结构",
+        "确定存储方案",
+        "定义持久化策略"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "gsd-context: 清理过期的状态文件，优化存储",
+      "expected_output": {
+        "primary_output": "清理过期状态文件",
+        "cleanup_result": {
+          "files_removed": 5,
+          "space_saved": "2MB",
+          "kept_files": ["STATE.md", "ROADMAP.md"]
+        }
+      },
+      "files": [],
+      "expectations": [
+        "识别过期文件",
+        "清理不必要文件",
+        "保留关键状态"
+      ]
+    }
+  ]
+}

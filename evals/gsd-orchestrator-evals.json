@@ -1,0 +1,177 @@
+{
+  "skill_name": "gsd-orchestrator",
+  "description": "GSD 调度中心。自主判断用户意图，分发到合适的子技能。根据场景选择使用 search/code-reviewer 等子代理类型。",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "gsd-orchestrator: 用户说'我想创建一个新项目'",
+      "expected_output": {
+        "primary_output": "识别为新项目任务，分发到 gsd-researcher",
+        "intent_classification": "新项目规划",
+        "skill_chain": ["gsd-researcher", "gsd-roadmap"]
+      },
+      "files": [],
+      "expectations": [
+        "识别新项目意图",
+        "分发到合适的子技能"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "gsd-orchestrator: 用户说'我需要研究这个代码库'",
+      "expected_output": {
+        "primary_output": "识别为研究任务，使用 search 子代理",
+        "intent_classification": "代码研究",
+        "subagent_type": "search"
+      },
+      "files": [],
+      "expectations": [
+        "识别研究任务",
+        "使用 search 子代理类型"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "gsd-orchestrator: 用户说'帮我检查代码质量'",
+      "expected_output": {
+        "primary_output": "识别为代码审查任务，使用 code-reviewer 子代理",
+        "intent_classification": "代码审查",
+        "subagent_type": "code-reviewer"
+      },
+      "files": [],
+      "expectations": [
+        "识别代码审查任务",
+        "使用 code-reviewer 子代理"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "gsd-orchestrator: 用户说'帮我处理一下'，没有提供更多上下文",
+      "expected_output": {
+        "primary_output": "处理模糊意图，使用 AskUserQuestion 澄清",
+        "clarification_questions": [
+          "您想要做什么？",
+          "是创建新功能还是修复问题？"
+        ],
+        "fallback_strategy": "请求用户提供更多信息"
+      },
+      "files": [],
+      "expectations": [
+        "识别意图不明确",
+        "使用 AskUserQuestion 澄清",
+        "不随意猜测意图"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "gsd-orchestrator: 用户说'帮我完成这个任务，同时检查代码有没有问题'",
+      "expected_output": {
+        "primary_output": "识别多个意图，分发到不同技能",
+        "intents": [
+          {"intent": "执行任务", "skill": "gsd-executor"},
+          {"intent": "代码审查", "skill": "code-reviewer"}
+        ],
+        "parallel_execution": true
+      },
+      "files": [],
+      "expectations": [
+        "识别多个意图",
+        "拆分任务",
+        "并行分发到不同技能"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "gsd-orchestrator: 用户要求的功能不在现有技能列表中",
+      "expected_output": {
+        "primary_output": "处理无匹配技能的场景",
+        "fallback_actions": [
+          "解释可用技能范围",
+          "建议替代方案"
+        ],
+        "user_guidance": "提供可用技能列表"
+      },
+      "files": [],
+      "expectations": [
+        "识别技能不匹配",
+        "提供友好的降级处理",
+        "引导用户"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "gsd-orchestrator: 用户说'执行任务'，但未指定是哪个任务",
+      "expected_output": {
+        "primary_output": "处理技能选择超时或信息不足",
+        "actions": [
+          "检查当前项目状态",
+          "识别待执行任务",
+          "询问用户确认"
+        ]
+      },
+      "files": [],
+      "expectations": [
+        "获取项目上下文",
+        "识别可执行任务",
+        "请求用户确认"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "gsd-orchestrator: 分发的 gsd-executor 执行失败",
+      "expected_output": {
+        "primary_output": "处理子技能执行失败",
+        "error_handling": {
+          "failure_skill": "gsd-executor",
+          "error_type": "执行超时",
+          "recovery_strategy": "重试或分发到 gsd-debugger"
+        }
+      },
+      "files": [],
+      "expectations": [
+        "捕获技能执行错误",
+        "评估错误类型",
+        "决定重试或转交"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "gsd-orchestrator: 用户需要一个完整的开发流程：研究 → 规划 → 执行 → 验证",
+      "expected_output": {
+        "primary_output": "构建并执行技能链",
+        "skill_chain": [
+          "gsd-researcher",
+          "gsd-planner",
+          "gsd-executor",
+          "gsd-verifier"
+        ],
+        "execution_order": "sequential",
+        "context_passing": "每个技能的输出传递给下一个"
+      },
+      "files": [],
+      "expectations": [
+        "构建完整的技能链",
+        "按顺序执行",
+        "传递上下文"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "gsd-orchestrator: 从 gsd-researcher 获取的研究结果需要传递给 gsd-planner",
+      "expected_output": {
+        "primary_output": "在技能间传递上下文",
+        "context_transfer": {
+          "from": "gsd-researcher",
+          "to": "gsd-planner",
+          "data": ["技术栈信息", "项目结构", "调研结论"]
+        }
+      },
+      "files": [],
+      "expectations": [
+        "从上一个技能获取输出",
+        "整理上下文数据",
+        "传递给下一个技能"
+      ]
+    }
+  ]
+}

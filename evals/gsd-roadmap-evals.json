@@ -1,0 +1,147 @@
+{
+  "skill_name": "gsd-roadmap",
+  "description": "路线图规划技能。创建项目里程碑和阶段规划，在大型复杂项目时推荐使用 Trae Spec 模式。",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "gsd-roadmap: 为我的 React 项目创建路线图",
+      "expected_output": {
+        "primary_output": "生成项目路线图和里程碑规划",
+        "roadmap_structure": {
+          "phases": ["Phase 1: 基础架构", "Phase 2: 核心功能", "Phase 3: 优化完善"],
+          "milestones": ["MVP 完成", "Beta 发布", "正式发布"]
+        }
+      },
+      "files": [],
+      "expectations": [
+        "创建里程碑规划",
+        "生成阶段划分"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "gsd-roadmap: 这是一个大型项目，有 10+ 个功能模块",
+      "expected_output": {
+        "primary_output": "推荐使用 Trae Spec 模式",
+        "spec_recommendation": {
+          "reason": "项目复杂度高，需要详细技术规范",
+          "suggestion": "使用 Trae Spec 模式创建详细规范文档",
+          "benefits": ["更清晰的技术架构", "多团队协作支持", "详细接口定义"]
+        }
+      },
+      "files": [],
+      "expectations": [
+        "识别大型项目场景",
+        "推荐 Spec 模式"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "gsd-roadmap: 更新现有路线图，添加新的功能模块",
+      "expected_output": {
+        "primary_output": "更新路线图并保持兼容性",
+        "update_scope": {
+          "added_modules": ["用户权限系统"],
+          "impact_assessment": "对现有阶段的影响"
+        }
+      },
+      "files": [],
+      "expectations": [
+        "识别需要更新的部分",
+        "评估影响范围",
+        "更新路线图"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "gsd-roadmap: 创建里程碑之间的依赖关系",
+      "expected_output": {
+        "primary_output": "定义里程碑依赖",
+        "dependency_structure": {
+          "milestone_1": "基础功能完成",
+          "milestone_2": "依赖 milestone_1",
+          "milestone_3": "依赖 milestone_2"
+        }
+      },
+      "files": [],
+      "expectations": [
+        "识别里程碑间的依赖",
+        "定义依赖关系",
+        "验证依赖合理性"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "gsd-roadmap: 评估项目风险并添加到路线图",
+      "expected_output": {
+        "primary_output": "识别项目风险并制定缓解计划",
+        "risk_assessment": {
+          "technical_risks": ["第三方 API 依赖", "技术栈复杂度"],
+          "schedule_risks": ["资源不足", "需求变更"],
+          "mitigation_plans": "缓解措施"
+        }
+      },
+      "files": [],
+      "expectations": [
+        "识别技术风险",
+        "识别进度风险",
+        "制定缓解措施"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "gsd-roadmap: 为路线图中的每个阶段估算资源需求",
+      "expected_output": {
+        "primary_output": "生成资源估算报告",
+        "resource_estimation": {
+          "phase_1": {"developers": 2, "weeks": 4},
+          "phase_2": {"developers": 3, "weeks": 6},
+          "phase_3": {"developers": 2, "weeks": 3}
+        },
+        "total_effort": "总人周估算"
+      },
+      "files": [],
+      "expectations": [
+        "为每个阶段估算人力",
+        "为每个阶段估算时间",
+        "计算总资源需求"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "gsd-roadmap: 根据业务优先级调整阶段顺序",
+      "expected_output": {
+        "primary_output": "重新排序阶段并说明理由",
+        "reordering": {
+          "original_order": ["Phase A", "Phase B", "Phase C"],
+          "new_order": ["Phase B", "Phase A", "Phase C"],
+          "reason": "Phase B 业务价值更高"
+        }
+      },
+      "files": [],
+      "expectations": [
+        "理解业务优先级",
+        "重新排序阶段",
+        "说明调整理由"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "gsd-roadmap: 创建路线图的可视化展示",
+      "expected_output": {
+        "primary_output": "生成路线图可视化",
+        "visualization": {
+          "format": "Gantt 图或时间线",
+          "timeline_view": "按时间展示里程碑",
+          "dependency_view": "按依赖关系展示"
+        }
+      },
+      "files": [],
+      "expectations": [
+        "使用合适的可视化格式",
+        "展示时间线",
+        "展示依赖关系"
+      ]
+    }
+  ]
+}

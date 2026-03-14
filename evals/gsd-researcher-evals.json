@@ -1,0 +1,113 @@
+{
+  "skill_name": "gsd-researcher",
+  "description": "技术研究技能。研究技术栈、框架选择、架构模式等。",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "gsd-researcher: 帮我研究一下 React 19 的新特性",
+      "expected_output": {
+        "primary_output": "提供 React 19 新特性研究报告",
+        "research_content": {
+          "major_features": ["Server Components", "Actions", "显著性能提升"],
+          "breaking_changes": ["需要迁移指南"],
+          "recommendations": ["建议何时升级"]
+        }
+      },
+      "files": [],
+      "expectations": [
+        "调研 React 19 新特性",
+        "提供技术分析"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "gsd-researcher: 帮我研究这个项目的技术栈",
+      "expected_output": {
+        "primary_output": "分析项目使用的技术栈",
+        "tech_stack": {
+          "frontend": ["React", "TypeScript"],
+          "backend": ["Node.js", "Express"],
+          "database": ["PostgreSQL"],
+          "dev_tools": ["Git", "Docker"]
+        }
+      },
+      "files": [],
+      "expectations": [
+        "分析技术栈组成",
+        "提供技术栈报告"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "gsd-researcher: 比较 Vue 3 和 React 的优劣，为新项目选择框架",
+      "expected_output": {
+        "primary_output": "提供框架对比分析",
+        "comparison": {
+          "vue3_strengths": ["学习曲线平缓", "文档优秀"],
+          "react_strengths": ["生态丰富", "灵活性高"],
+          "recommendation": "根据项目需求推荐"
+        }
+      },
+      "files": [],
+      "expectations": [
+        "对比两个框架",
+        "分析各自优劣",
+        "给出推荐建议"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "gsd-researcher: 研究微服务架构模式，了解何时适合采用",
+      "expected_output": {
+        "primary_output": "提供微服务架构研究报告",
+        "research_content": {
+          "when_to_use": ["团队规模大", "需要独立部署"],
+          "when_to_avoid": ["小型项目", "团队经验不足"],
+          "alternatives": ["模块化单体", "Serverless"]
+        }
+      },
+      "files": [],
+      "expectations": [
+        "研究微服务适用场景",
+        "提供替代方案",
+        "给出建议"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "gsd-researcher: 研究前端性能优化最佳实践",
+      "expected_output": {
+        "primary_output": "提供性能优化指南",
+        "optimization_areas": [
+          {"area": "加载性能", "techniques": ["代码分割", "懒加载"]},
+          {"area": "渲染性能", "techniques": ["虚拟列表", "memo"]},
+          {"area": "网络性能", "techniques": ["CDN", "缓存"]}
+        ]
+      },
+      "files": [],
+      "expectations": [
+        "识别优化领域",
+        "列出优化技术",
+        "提供实践指南"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "gsd-researcher: 研究 REST API vs GraphQL 的区别和适用场景",
+      "expected_output": {
+        "primary_output": "提供 API 风格对比分析",
+        "comparison": {
+          "rest_pros": ["简单", "缓存友好", "广泛支持"],
+          "graphql_pros": ["灵活", "减少请求", "类型安全"],
+          "recommendation": "根据场景选择"
+        }
+      },
+      "files": [],
+      "expectations": [
+        "对比两种 API 风格",
+        "分析适用场景",
+        "给出选择建议"
+      ]
+    }
+  ]
+}

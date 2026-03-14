@@ -1,0 +1,168 @@
+{
+  "skill_name": "gsd",
+  "description": "GSD (Get Shit Done) 完整工作流系统，包含规划、执行、验证、调试闭环。适用于新项目规划、阶段执行、任务验证、问题调试等场景。",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "gsd: 我想创建一个新的 React 项目，帮我规划一下",
+      "expected_output": {
+        "primary_output": "触发 gsd-orchestrator -> gsd-researcher -> gsd-roadmap 流程，创建项目研究、路线图规划",
+        "skill_chain": ["gsd-orchestrator", "gsd-researcher", "gsd-roadmap"]
+      },
+      "files": [],
+      "expectations": [
+        "自动识别为新项目任务",
+        "调用 gsd-researcher 进行技术调研",
+        "调用 gsd-roadmap 创建路线图"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "gsd: 帮我规划下一个阶段的开发任务",
+      "expected_output": {
+        "primary_output": "触发 gsd-orchestrator -> gsd-planner -> gsd-plan-checker 流程",
+        "skill_chain": ["gsd-orchestrator", "gsd-planner", "gsd-plan-checker"]
+      },
+      "files": [],
+      "expectations": [
+        "识别为规划阶段任务",
+        "调用 gsd-planner 生成计划",
+        "调用 gsd-plan-checker 检查计划"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "gsd: 执行当前阶段的任务",
+      "expected_output": {
+        "primary_output": "触发 gsd-orchestrator -> gsd-executor -> gsd-verifier 执行流程",
+        "skill_chain": ["gsd-orchestrator", "gsd-executor", "gsd-verifier"]
+      },
+      "files": [],
+      "expectations": [
+        "识别为执行任务",
+        "调用 gsd-executor 执行",
+        "调用 gsd-verifier 验证"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "gsd: 验证功能是否完成",
+      "expected_output": {
+        "primary_output": "触发 gsd-verifier 进行功能验证",
+        "verification_items": ["功能完整性", "测试通过率"]
+      },
+      "files": [],
+      "expectations": [
+        "调用 gsd-verifier",
+        "检查功能完成度"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "gsd: 我的代码报错了，帮我调试",
+      "expected_output": {
+        "primary_output": "触发 gsd-debugger 进行问题诊断",
+        "diagnosis_steps": ["症状确认", "根因分析", "修复建议"]
+      },
+      "files": [],
+      "expectations": [
+        "调用 gsd-debugger",
+        "进行问题诊断和分析"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "gsd: 查看当前项目进度",
+      "expected_output": {
+        "primary_output": "触发 gsd-progress 显示项目状态",
+        "display_content": ["当前阶段", "任务进度", "里程碑状态"]
+      },
+      "files": [],
+      "expectations": [
+        "调用 gsd-progress",
+        "显示项目当前进度"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "gsd: 我需要暂停工作，请保存状态",
+      "expected_output": {
+        "primary_output": "触发 gsd-pause 创建交接文件",
+        "saved_data": ["项目状态", "任务进度", "待办事项"]
+      },
+      "files": [],
+      "expectations": [
+        "调用 gsd-pause",
+        "创建状态保存文件"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "gsd: 帮我恢复之前的工作",
+      "expected_output": {
+        "primary_output": "触发 gsd-resume 加载上下文",
+        "restored_context": ["当前阶段", "项目状态", "任务列表"]
+      },
+      "files": [],
+      "expectations": [
+        "调用 gsd-resume",
+        "恢复之前的工作状态"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "gsd: 帮我研究一下这个代码库的结构",
+      "expected_output": {
+        "primary_output": "触发 gsd-researcher 或 gsd-codebase-mapper 进行代码分析",
+        "analysis_content": ["目录结构", "技术栈", "模块依赖"]
+      },
+      "files": [],
+      "expectations": [
+        "识别为研究任务",
+        "分析代码库结构"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "gsd: 我现在想用 Trae Plan 模式来执行这个任务",
+      "expected_output": {
+        "primary_output": "识别 Plan 模式需求，准备任务摘要信息供 Plan 模式使用",
+        "information_prepared": ["任务目标", "技术栈", "执行步骤"]
+      },
+      "files": [],
+      "expectations": [
+        "识别 Plan 模式触发",
+        "准备任务摘要信息"
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "gsd: 完整的新项目流程：从研究到部署",
+      "expected_output": {
+        "primary_output": "执行完整 GSD 工作流",
+        "complete_workflow": ["gsd-researcher", "gsd-roadmap", "gsd-planner", "gsd-executor", "gsd-verifier"],
+        "context_passing": "每个阶段的输出传递给下一个阶段"
+      },
+      "files": [],
+      "expectations": [
+        "按正确顺序执行工作流",
+        "传递上下文数据",
+        "验证最终结果"
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "gsd: 遇到问题需要调试，然后修复并验证",
+      "expected_output": {
+        "primary_output": "执行调试-修复-验证闭环",
+        "workflow": ["gsd-debugger 诊断", "gsd-executor 修复", "gsd-verifier 验证"]
+      },
+      "files": [],
+      "expectations": [
+        "调用 debugger 诊断问题",
+        "执行修复",
+        "验证修复结果"
+      ]
+    }
+  ]
+}
