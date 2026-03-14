@@ -94,6 +94,19 @@ Glob: .planning/research/*.md
 - `research_exists`: true/false
 - `research_files`: 文件列表
 
+### Step 2.6: 检查 ROADMAP.md（规划前置检查）
+
+**⚠️ 重要：当用户触发规划时，必须先检查 ROADMAP.md 是否存在**
+
+使用 Read 工具检查 `.planning/ROADMAP.md` 是否存在：
+
+```
+Read: .planning/ROADMAP.md
+```
+
+**将检查结果保存到上下文变量**:
+- `roadmap_exists`: true/false
+
 ### Step 3: 分析用户意图
 
 结合当前状态和用户输入进行判断：
@@ -101,7 +114,7 @@ Glob: .planning/research/*.md
 | 用户输入关键词 | 当前状态 | 判定操作 | 对应子技能 |
 |--------------|---------|---------|-----------|
 | "创建项目"、"新项目"、"开始项目" | 无项目 | new-project | gsd-researcher |
-| "规划"、"plan"、"计划" | 有项目无 PLAN | 检查研究是否存在 → plan-phase | gsd-planner |
+| "规划"、"plan"、"计划" | 有项目无 PLAN | 检查 ROADMAP.md → 检查研究是否存在 → plan-phase | gsd-planner |
 | "执行"、"execute"、"开始做" | 有 PLAN 无 SUMMARY | execute-phase | gsd-executor |
 | "验证"、"verify"、"完成没有" | 有 SUMMARY | verify | gsd-verifier |
 | "调试"、"debug"、"bug"、"报错"、"错误"、"异常"、"问题"、"崩溃"、"程序" | 任意状态 | debugger | gsd-debugger |
@@ -115,12 +128,19 @@ Glob: .planning/research/*.md
 
 ### Step 4: 调用子 Skill
 
-**⚠️ plan-phase 特殊处理：检查研究是否存在**
+**⚠️ plan-phase 特殊处理：检查 ROADMAP.md 和研究是否存在**
 
-当判定操作为"检查研究是否存在 → plan-phase"时：
+当判定操作为"检查 ROADMAP.md → 检查研究是否存在 → plan-phase"时：
 
-1. **检查 Step 2.5 的研究目录检查结果**
+1. **检查 Step 2.6 的 ROADMAP.md 检查结果**
 2. **决策分支**:
+   - ROADMAP.md 不存在 →
+     1. 提示用户："⚠️ 规划需要先有项目路线图"
+     2. 提示："请先说 '路线图' 创建项目路线图"
+     3. 停止执行规划
+   - ROADMAP.md 存在 → 继续检查研究
+3. **检查 Step 2.5 的研究目录检查结果**
+4. **决策分支**:
    - 研究目录存在 → 直接调用 gsd-planner
    - 研究目录不存在 →
      1. 使用 AskUserQuestion 询问用户：

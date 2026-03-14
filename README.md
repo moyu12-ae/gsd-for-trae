@@ -130,11 +130,101 @@ GSD 使用 `.planning/` 目录管理项目状态（保留原版 GSD 结构）：
 3. **保持小闭环** - 每阶段 2-3 个任务
 4. **验证驱动** - 每个任务有明确验证标准
 5. **记录偏差** - 透明记录所有偏差处理
+6. **配合 Rules 使用** - 配置 TRAE rules 提升效率（详见下文）
+
+## TRAE Rules 配置指南
+
+GSD 与 TRAE 的 Rules 系统配合使用可以大幅提升开发效率和代码质量。通过配置 rules，可以：
+
+- 自动化应用团队编码规范
+- 统一代码风格和最佳实践
+- 减少重复输入相同要求
+- 确保各阶段遵循一致标准
+
+### Rules 与 GSD 各阶段的结合点
+
+| GSD 阶段 | 适用 Rules 类型 | 优化效果 |
+|---------|----------------|---------|
+| **研究阶段** | 技术栈规范、研究方法 | 确保研究方向符合团队技术路线 |
+| **规划阶段** | 代码结构规范、文件命名 | 自动应用团队架构模式 |
+| **执行阶段** | 代码风格、测试要求、提交规范 | 确保代码质量一致 |
+| **验证阶段** | 验收标准、测试覆盖率 | 统一验证流程 |
+| **调试阶段** | 调试流程、问题排查 | 规范化问题解决方法 |
+
+### 快速开始
+
+1. **查看模板**：参考 [RULES_TEMPLATE.md](./RULES_TEMPLATE.md) 获取完整的 rules 模板
+2. **个人规则**：将通用规则复制到 `user_rules.md`
+3. **项目规则**：将项目特定规则复制到 `.trae/rules/project_rules.md`
+4. **调整配置**：根据团队/项目需求修改规则内容
+
+### 推荐配置示例
+
+#### 1. 基础配置 (user_rules.md)
+
+```
+# 个人基础配置
+- Always reply to me in Chinese.
+- Use Chinese for all code comments.
+- My system is Mac.
+- Use pnpm instead of npm.
+
+# GSD 工作流优化
+- When generating code, follow the project's existing coding style.
+- Make frequent, small commits - one commit per task step.
+- Write clear commit messages following Conventional Commits.
+```
+
+#### 2. 项目配置 (project_rules.md)
+
+```
+# 团队编码规范
+- Use TypeScript for all new code.
+- Follow ESLint rules defined in .eslintrc.js.
+- Run `pnpm lint` before committing.
+- Write unit tests for all new features.
+
+# GSD 规划规范
+- Prioritize vertical slices over horizontal layers.
+- Break tasks into 2-5 minute steps.
+- Every task must have clear verification criteria.
+
+# GSD 执行规范
+- Use TDD approach when possible.
+- Run two-stage review after each task.
+- Document all deviations in SUMMARY.md.
+```
+
+### Rules 优先级
+
+记住 TRAE 的规则优先级（从高到低）：
+```
+用户输入 > 自定义智能体提示词 > user_rules.md > project_rules.md
+```
+
+### 常见问题
+
+**Q: 配置了 rules 但没有生效？**
+- 检查规则描述是否清晰具体（参考 [TRAE Rules 配置指南](../../TRAE_规则（Rules）配置指南：个人习惯、团队规范与最佳实践.md)）
+- 确认文件路径使用相对于项目根目录的完整路径
+- 检查是否有更高优先级的规则覆盖
+
+**Q: 团队项目如何配置？**
+- 将团队规范放入 `project_rules.md` 并提交到仓库
+- 在 GSD 研究阶段就明确团队规范
+- 在规划阶段确保计划符合团队规范
+
+**Q: Rules 写多少合适？**
+- 推荐 500-5000 字节，不超过 20000 字节
+- 专注于真正重要的规范，避免过度配置
+- 可以分阶段逐步完善
 
 ## 参考
 
 - [GSD 原版项目](https://github.com/gsd-build/get-shit-done)
 - [SZD 移植范例](../szd/) - Suzent 平台上的 GSD 移植
+- [TRAE Rules 配置指南](../../TRAE_规则（Rules）配置指南：个人习惯、团队规范与最佳实践.md) - 详细的 rules 配置说明
+- [RULES_TEMPLATE.md](./RULES_TEMPLATE.md) - GSD 专用 rules 模板
 
 ## 许可证
 
